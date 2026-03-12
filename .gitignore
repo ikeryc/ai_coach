@@ -1,0 +1,97 @@
+# ========================
+# Xcode
+# ========================
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+build/
+DerivedData/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# SPM
+.build/
+.swiftpm/
+*.resolved
+# Mantener Package.resolved si usas SPM con dependencias exactas:
+# !Package.resolved
+
+# ========================
+# iOS / macOS
+# ========================
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.pbxuser
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+timeline.xctimeline
+playground.xcworkspace
+xcuserdata/
+
+# ========================
+# Archivos del sistema
+# ========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ========================
+# Claves y secretos
+# ========================
+# NUNCA subir estos archivos
+*.env
+.env.*
+Secrets.swift
+APIKeys.swift
+Config.xcconfig
+GoogleService-Info.plist
+**/Secrets/**
+
+# ========================
+# Supabase local dev
+# ========================
+supabase/.branches/
+supabase/.temp/
+supabase/functions/.env
+
+# ========================
+# Archivos grandes (wger dataset)
+# ========================
+# Los GIFs de wger se descargan bajo demanda, no se suben
+**/*.gif
+# El JSON de wger puede ser grande — considerar Git LFS si > 100MB
+# wger_exercises.json  <- descomenta si prefieres no subirlo
+
+# ========================
+# CocoaPods (no usamos, pero por si acaso)
+# ========================
+Pods/
+Podfile.lock
+
+# ========================
+# Fastlane
+# ========================
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# ========================
+# Otros
+# ========================
+*.log
+*.tmp

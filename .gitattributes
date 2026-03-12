@@ -1,0 +1,19 @@
+# Normaliza line endings a LF en el repo (cross-platform)
+* text=auto eol=lf
+
+# Swift y SQL siempre LF
+*.swift text eol=lf
+*.sql   text eol=lf
+*.md    text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+
+# Binarios — sin conversión
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.pdf   binary
+*.zip   binary
+*.ipa   binary
