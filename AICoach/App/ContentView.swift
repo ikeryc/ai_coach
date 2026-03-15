@@ -38,6 +38,10 @@ struct ContentView: View {
 struct MainTabView: View {
 
     @State private var selectedTab: AppTab = .dashboard
+    @Query(
+        filter: #Predicate<AdaptationEvent> { !$0.userApproved },
+        sort: \AdaptationEvent.appliedAt, order: .reverse
+    ) private var pendingAdaptations: [AdaptationEvent]
 
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -56,6 +60,7 @@ struct MainTabView: View {
             Tab("Entrenador", systemImage: "bubble.left.and.bubble.right.fill", value: AppTab.chat) {
                 ChatPlaceholderView()
             }
+            .badge(pendingAdaptations.isEmpty ? 0 : pendingAdaptations.count)
         }
         .tint(.blue)
     }
@@ -85,26 +90,8 @@ struct LoadingView: View {
 // MARK: - Placeholder Views (se reemplazan en fases siguientes)
 
 struct DashboardPlaceholderView: View {
-    @Environment(AppViewModel.self) private var appViewModel
-    @Environment(\.modelContext) private var modelContext
-
     var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Dashboard",
-                systemImage: "house.fill",
-                description: Text("Disponible en Fase 2")
-            )
-            .navigationTitle("AI Coach")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Sign Out") {
-                        Task { await appViewModel.signOut(modelContext: modelContext) }
-                    }
-                    .foregroundStyle(.red)
-                }
-            }
-        }
+        DashboardView()
     }
 }
 
@@ -116,32 +103,18 @@ struct WorkoutPlaceholderView: View {
 
 struct NutritionPlaceholderView: View {
     var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Nutrición",
-                systemImage: "fork.knife",
-                description: Text("Disponible en Fase 7")
-            )
-            .navigationTitle("Nutrición")
-        }
+        NutritionView()
     }
 }
 
 struct ProgressPlaceholderView: View {
     var body: some View {
-        BodyWeightView()
+        ProgressHubView()
     }
 }
 
 struct ChatPlaceholderView: View {
     var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Entrenador IA",
-                systemImage: "bubble.left.and.bubble.right.fill",
-                description: Text("Disponible en Fase 8")
-            )
-            .navigationTitle("Entrenador")
-        }
+        CoachView()
     }
 }

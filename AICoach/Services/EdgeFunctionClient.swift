@@ -69,11 +69,44 @@ final class EdgeFunctionClient {
     }
 }
 
-// MARK: - Request / Response types (stubs — se completan en fases 6-8)
+// MARK: - Request / Response types
 
 struct ProgramGenerationRequest: Encodable {
     let userId: String
     let contextJSON: String
+}
+
+/// Contexto serializado que se envía a la Edge Function para generar el programa.
+struct ProgramGenerationContext: Encodable {
+    let goal: String
+    let experienceLevel: String
+    let availableDays: Int
+    let equipment: String
+    let language: String = "es"
+}
+
+// MARK: - Generated program parsing
+
+/// DTO que representa el JSON que devuelve Claude con el programa generado.
+struct GeneratedProgramDTO: Decodable {
+    let name: String
+    let totalWeeks: Int
+    let days: [DayDTO]
+
+    struct DayDTO: Decodable {
+        let dayOfWeek: Int
+        let name: String
+        let exercises: [ExerciseDTO]
+    }
+
+    struct ExerciseDTO: Decodable {
+        let exerciseName: String
+        let sets: Int
+        let repMin: Int
+        let repMax: Int
+        let rir: Int
+        let restSeconds: Int?
+    }
 }
 
 struct ProgramGenerationResponse: Decodable {

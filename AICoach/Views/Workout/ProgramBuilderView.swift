@@ -5,6 +5,7 @@ struct ProgramBuilderView: View {
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Query private var profiles: [UserProfile]
 
     // Paso 1: info general
     @State private var name = ""
@@ -17,6 +18,9 @@ struct ProgramBuilderView: View {
     @State private var currentStep = 1
     @State private var showExercisePicker = false
     @State private var editingDayIndex: Int?
+
+    // IA
+    @State private var showAIGeneration = false
 
     struct BuilderDay: Identifiable {
         let id = UUID()
@@ -76,6 +80,15 @@ struct ProgramBuilderView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showAIGeneration) {
+                AIGenerationSheet(
+                    goal: goal,
+                    daysPerWeek: daysPerWeek,
+                    totalWeeks: totalWeeks,
+                    profile: profiles.first,
+                    onCreated: { dismiss() }
+                )
+            }
         }
     }
 
@@ -103,6 +116,26 @@ struct ProgramBuilderView: View {
 
             Section("Días por semana") {
                 Stepper("\(daysPerWeek) días", value: $daysPerWeek, in: 2...6)
+            }
+
+            Section {
+                Button {
+                    showAIGeneration = true
+                } label: {
+                    HStack {
+                        Image(systemName: "sparkles")
+                            .foregroundStyle(.purple)
+                        Text("Generar con IA")
+                            .foregroundStyle(.purple)
+                            .fontWeight(.semibold)
+                        Spacer()
+                        Text("Claude Opus")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            } footer: {
+                Text("Claude generará un programa personalizado basado en tu perfil y objetivos.")
             }
         }
     }

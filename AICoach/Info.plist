@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSCameraUsageDescription</key>
+    <string>AI Coach usa la cámara para escanear códigos de barras de alimentos y añadirlos a tu diario nutricional.</string>
+    <key>NSHealthShareUsageDescription</key>
+    <string>AI Coach lee tu peso corporal y entrenamientos de Apple Health para sincronizarlos automáticamente.</string>
+    <key>NSHealthUpdateUsageDescription</key>
+    <string>AI Coach guarda tu peso corporal en Apple Health cuando lo registras manualmente.</string>
+</dict>
+</plist>
