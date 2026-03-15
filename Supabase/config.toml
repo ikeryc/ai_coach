@@ -1,0 +1,12 @@
+[project]
+# Reemplaza con el ID de tu proyecto Supabase (Settings → General → Reference ID)
+project_id = "YOUR_PROJECT_ID"
+
+[functions.generate-program]
+verify_jwt = true
+
+[functions.ai-chat]
+verify_jwt = true
+
+[functions.weekly-analysis]
+verify_jwt = true
